@@ -19,7 +19,10 @@ exports.trainAndPredict = function (req, res) {
   var petal_width = parseFloat(req.body.petal_width);
   var epoch = parseFloat(req.body.epochs);
   var learning_rate = parseFloat(req.body.learning_rate);
-  var responseData = [sepal_length,sepal_length, petal_length, petal_width, epoch, learning_rate];
+  const responseData = [sepal_length,sepal_width, petal_length, petal_width];
+  console.log(responseData);
+  console.log("epoch: "+epoch);
+  console.log("learning_rate: "+learning_rate);
   //
   //tensor of features for training data
   // include only features, not the output
@@ -49,11 +52,7 @@ exports.trainAndPredict = function (req, res) {
   //
   //tensor of features for testing data
   const testingData = tf.tensor2d([
-      [
-    sepal_length,
-    sepal_width,
-    petal_length,
-    petal_width,],
+      responseData,
   ]);
   //console.log(testingData.dataSync())
   //
@@ -87,7 +86,7 @@ exports.trainAndPredict = function (req, res) {
     loss: "meanSquaredError",
     optimizer: tf.train.adam(learning_rate),
   });
-  console.log(model.summary());
+  console.log("model summary: " + model.summary());
   //
   //Train the model and predict the results for testing data
   //

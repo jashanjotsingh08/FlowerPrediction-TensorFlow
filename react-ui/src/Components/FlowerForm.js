@@ -18,6 +18,7 @@ function FlowerForm(props) {
   const [epochs, setEpochs] = useState("");
   const [predictedData, setPredictedData] = useState({});
   const [showLoading, setShowLoading] = useState(true);
+  const [predictedFlowerName, setPredictedFlowerName] = useState("");
 
   const apiUrl = "http://localhost:3000/run";
 
@@ -41,6 +42,10 @@ function FlowerForm(props) {
       })
       .catch((err) => console.log(err));
   };
+
+  function goBack() {
+    setShowLoading(true);
+  }
 
   return (
     <div>
@@ -105,7 +110,7 @@ function FlowerForm(props) {
                   <Form.Control
                     name="learning_rate"
                     id="learning_rate"
-                    placeholder=""
+                    placeholder="0.7"
                     type="number"
                     step="any"
                     onChange={(e) => setLearning_rate(e.target.value)}
@@ -117,7 +122,7 @@ function FlowerForm(props) {
                     name="epochs"
                     id="epochs"
                     type="number"
-                    placeholder=""
+                    placeholder="200"
                     step="any"
                     onChange={(e) => setEpochs(e.target.value)}
                   />
@@ -135,33 +140,40 @@ function FlowerForm(props) {
         <div>
           <Container>
             <div className="jumbotron text-center">
-                <h2>Prediction Results</h2>
-            
-            <h2> The values for species will be:</h2>
-            <li>setosa: 1,0,0</li>
-            <li>virginica: 0,1,0</li>
-            <li>versicolor: 0,0,1 </li>
+              <h2>Prediction Results</h2>
+
+              <h2> The values for species will be:</h2>
+              <li>setosa: 1,0,0</li>
+              <li>virginica: 0,1,0</li>
+              <li>versicolor: 0,0,1 </li>
             </div>
             <div className="row">
-                <div className="col-md-4 offset-md-4">
-                    <table className="App-table">
-                      <thead>
-                        <tr>
-                          <th>Test Results</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td className="App-td">
-                            {predictedData.row1.map((value, index) => (
-                              <p key={index}>{value}</p>
-                            ))}
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                </div>
+              <div className="col-md-4 offset-md-4">
+                <table className="App-table table table-striped ">
+                  <thead className="thead-light">
+                    <tr>
+                      <th>Test Results</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="App-td">
+                        {predictedData.row1.map((value, index) => (
+                          <p key={index}>{value}</p>
+                        ))}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
+            <Row>
+              <div className="text-center">
+                <Button className="btn btn-block" onClick={goBack}>
+                  Back
+                </Button>
+              </div>
+            </Row>
           </Container>
         </div>
       )}
