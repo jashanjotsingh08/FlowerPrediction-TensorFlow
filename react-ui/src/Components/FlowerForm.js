@@ -180,13 +180,11 @@ function FlowerForm(props) {
                 </table>
               </div>
             </div>
-            <Row>
-              <div className="text-center">
-                <Button className="btn btn-block" onClick={goBack}>
+              <div className="text-center col-md-4 offset-md-4">
+                <button className="btn btn-primary btn-block" onClick={goBack}>
                   Back
-                </Button>
+                </button>
               </div>
-            </Row>
           </Container>
         </div>
       )}

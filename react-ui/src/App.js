@@ -44,11 +44,11 @@ function App() {
             </Link>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
               <ul className="navbar-nav ">
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link className="nav-link" to={"/"}>
                     FlowerForm
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>
