@@ -37,6 +37,23 @@ function FlowerForm(props) {
       .then((response) => {
         console.log(response);
         setPredictedData(response.data);
+        var index = (response.data.row1).findIndex(v => Math.round(v)===1);
+        if(index ===0){
+          setPredictedFlowerName("Setosa");
+          console.log("index: "+index);
+        }
+        else if(index ===1){
+          setPredictedFlowerName("Virginica");
+          console.log("index: "+index);
+        }
+        else if(index ===2){
+          setPredictedFlowerName("Versicolor");
+          console.log("index: "+index);
+        }
+        else{
+          console.error("error: index"+index);
+        }
+         
         setShowLoading(false);
         //props.history.push("/showDetails");
       })
@@ -110,7 +127,7 @@ function FlowerForm(props) {
                   <Form.Control
                     name="learning_rate"
                     id="learning_rate"
-                    placeholder="0.7"
+                    placeholder="0.07"
                     type="number"
                     step="any"
                     onChange={(e) => setLearning_rate(e.target.value)}
@@ -141,11 +158,7 @@ function FlowerForm(props) {
           <Container>
             <div className="jumbotron text-center">
               <h2>Prediction Results</h2>
-
-              <h2> The values for species will be:</h2>
-              <li>setosa: 1,0,0</li>
-              <li>virginica: 0,1,0</li>
-              <li>versicolor: 0,0,1 </li>
+              <h3 className="text-danger">Predicted Flower : {predictedFlowerName}</h3>
             </div>
             <div className="row">
               <div className="col-md-4 offset-md-4">

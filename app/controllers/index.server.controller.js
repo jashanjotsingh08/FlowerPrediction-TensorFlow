@@ -12,17 +12,17 @@ exports.trainAndPredict = function (req, res) {
   console.log(req.body);
   //
   // convert/setup our data for tensorflow.js
-  
+
   var sepal_length = parseFloat(req.body.sepal_length);
   var sepal_width = parseFloat(req.body.sepal_width);
   var petal_length = parseFloat(req.body.petal_length);
   var petal_width = parseFloat(req.body.petal_width);
-  var epoch = parseFloat(req.body.epochs);
+  var epoch = parseInt(req.body.epochs);
   var learning_rate = parseFloat(req.body.learning_rate);
-  const responseData = [sepal_length,sepal_width, petal_length, petal_width];
+  const responseData = [sepal_length, sepal_width, petal_length, petal_width];
   console.log(responseData);
-  console.log("epoch: "+epoch);
-  console.log("learning_rate: "+learning_rate);
+  console.log("epoch: " + epoch);
+  console.log("learning_rate: " + learning_rate);
   //
   //tensor of features for training data
   // include only features, not the output
@@ -51,9 +51,7 @@ exports.trainAndPredict = function (req, res) {
   //console.log(outputData.dataSync())
   //
   //tensor of features for testing data
-  const testingData = tf.tensor2d([
-      responseData,
-  ]);
+  const testingData = tf.tensor2d([responseData]);
   //console.log(testingData.dataSync())
   //
   // build neural network using a sequential model
