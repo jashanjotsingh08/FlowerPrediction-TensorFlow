@@ -3,7 +3,6 @@ import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 
 import FlowerForm from "./Components/FlowerForm";
-import ShowResults from "./Components/ShowResults";
 
 import {
   BrowserRouter as Router,
