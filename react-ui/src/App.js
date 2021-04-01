@@ -3,6 +3,7 @@ import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 
 import FlowerForm from "./Components/FlowerForm";
+import ShowResults from "./Components/ShowResults";
 
 import {
   BrowserRouter as Router,
@@ -14,8 +15,7 @@ import {
 
 import "./App.css";
 
-function App() {
-
+function App(props) {
   //runs once after the first rendering of page
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -52,12 +52,14 @@ function App() {
             </div>
           </div>
         </nav>
-
-
-            <Switch>
-              <Route path="/" render={() => <FlowerForm />} />
-            </Switch>
-          </div>
+        <Route exact path="/">
+        <Redirect to="/flowerForm" />
+      </Route>
+        <div>
+          <Route path="/flowerForm" render={() => <FlowerForm />} />
+          <Route path="/showResults" render={() => <ShowResults />} />
+        </div>
+      </div>
     </Router>
   );
 }

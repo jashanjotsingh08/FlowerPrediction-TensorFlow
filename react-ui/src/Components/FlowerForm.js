@@ -23,6 +23,7 @@ function FlowerForm(props) {
   const apiUrl = "http://localhost:3000/run";
 
   const sendData = (e) => {
+    setShowLoading(false);
     e.preventDefault();
     const data = {
       sepal_length: sepal_length,
@@ -35,34 +36,37 @@ function FlowerForm(props) {
     axios
       .post(apiUrl, data)
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
         setPredictedData(response.data);
-        var index = (response.data.row1).findIndex(v => Math.round(v)===1);
-        if(index ===0){
+        var name = "";
+        var index = response.data.row.findIndex((v) => Math.round(v) === 1);
+        if (index === 0) {
           setPredictedFlowerName("Setosa");
-          console.log("index: "+index);
-        }
-        else if(index ===1){
+          name = "Setosa";
+          console.log("index: " + index);
+        } else if (index === 1) {
           setPredictedFlowerName("Virginica");
-          console.log("index: "+index);
-        }
-        else if(index ===2){
+          name = "Virginica";
+          console.log("index: " + index);
+        } else if (index === 2) {
+          name = "Versicolor";
           setPredictedFlowerName("Versicolor");
-          console.log("index: "+index);
+          console.log("index: " + index);
+        } else {
+          console.error("error: index" + index);
         }
-        else{
-          console.error("error: index"+index);
-        }
-         
-        setShowLoading(false);
-        //props.history.push("/showDetails");
+        console.log("predictedFlowerName: " + predictedFlowerName);
+        console.log("predictedData: " + response.data.row);
+        
+        props.history.push({
+          pathname: "/showResults",
+
+          predictedFlowerName: name,
+          predictedData: response.data,
+        });
       })
       .catch((err) => console.log(err));
   };
-
-  function goBack() {
-    setShowLoading(true);
-  }
 
   return (
     <div>
@@ -83,6 +87,7 @@ function FlowerForm(props) {
                     type="number"
                     step="any"
                     onChange={(e) => setSepal_length(e.target.value)}
+                    required
                   />
                 </Form.Group>
                 <Form.Group as={Col} md="6">
@@ -94,7 +99,7 @@ function FlowerForm(props) {
                     type="number"
                     step="any"
                     onChange={(e) => setSepal_width(e.target.value)}
-                  />
+                  required/>
                 </Form.Group>
               </Row>
               <Row>
@@ -118,6 +123,7 @@ function FlowerForm(props) {
                     type="number"
                     step="any"
                     onChange={(e) => setPetal_width(e.target.value)}
+                    required
                   />
                 </Form.Group>
               </Row>
@@ -131,6 +137,7 @@ function FlowerForm(props) {
                     type="number"
                     step="any"
                     onChange={(e) => setLearning_rate(e.target.value)}
+                    required
                   />
                 </Form.Group>
                 <Form.Group as={Col} md="6">
@@ -142,6 +149,7 @@ function FlowerForm(props) {
                     placeholder="200"
                     step="any"
                     onChange={(e) => setEpochs(e.target.value)}
+                    required
                   />
                 </Form.Group>
               </Row>
@@ -154,38 +162,10 @@ function FlowerForm(props) {
           </Container>
         </div>
       ) : (
-        <div>
-          <Container>
-            <div className="jumbotron text-center">
-              <h2>Prediction Results</h2>
-              <h3 className="text-danger">Predicted Flower : {predictedFlowerName}</h3>
-            </div>
-            <div className="row">
-              <div className="col-md-4 offset-md-4">
-                <table className="App-table table table-striped ">
-                  <thead className="thead-light">
-                    <tr>
-                      <th>Test Results</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td className="App-td">
-                        {predictedData.row1.map((value, index) => (
-                          <p key={index}>{value}</p>
-                        ))}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-              <div className="text-center col-md-4 offset-md-4">
-                <button className="btn btn-primary btn-block" onClick={goBack}>
-                  Back
-                </button>
-              </div>
-          </Container>
+        <div className="text-center">
+          <Spinner className="mt-5" animation="border" role="status">
+            <span className="sr-only">Waiting for results...</span>
+          </Spinner>
         </div>
       )}
     </div>

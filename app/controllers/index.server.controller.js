@@ -113,15 +113,15 @@ exports.trainAndPredict = function (req, res) {
     //var tensorData = results.dataSync();
     results.array().then((array) => {
       console.log(array[0][0]);
-      var resultForData1 = array[0];
-      var resultForData2 = array[1];
-      var resultForData3 = array[2];
+      var resultForData = array[0];
+      // var resultForData2 = array[1];
+      // var resultForData3 = array[2];
       var dataToSent = {
-        row1: resultForData1,
-        row2: resultForData2,
-        row3: resultForData3,
+        row: resultForData,
+        // row2: resultForData2,
+        // row3: resultForData3,
       };
-      console.log(resultForData1);
+      console.log(resultForData);
       res.status(200).send(dataToSent);
       //
 
