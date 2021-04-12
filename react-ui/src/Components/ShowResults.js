@@ -64,7 +64,7 @@ function ShowDetails(props) {
             <h1>
              Test Results</h1>
             </Card.Header>
-          <Card.Body>
+          <Card.Body className="alert-success">
          
             <Card.Title className="">Predicted Flower : {predictedFlowerName}</Card.Title>
             </Card.Body>

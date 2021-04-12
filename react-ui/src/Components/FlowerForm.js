@@ -85,7 +85,7 @@ function FlowerForm(props) {
                     id="sepal_length"
                     placeholder=""
                     type="number"
-                    step="any"
+                    step="0.1"
                     onChange={(e) => setSepal_length(e.target.value)}
                     required
                   />
@@ -97,7 +97,7 @@ function FlowerForm(props) {
                     id="sepal_width"
                     placeholder=""
                     type="number"
-                    step="any"
+                    step="0.1"
                     onChange={(e) => setSepal_width(e.target.value)}
                   required/>
                 </Form.Group>
@@ -110,7 +110,7 @@ function FlowerForm(props) {
                     id="petal_length"
                     placeholder=""
                     type="number"
-                    step="any"
+                    step="0.1"
                     onChange={(e) => setPetal_length(e.target.value)}
                   />
                 </Form.Group>
@@ -121,7 +121,7 @@ function FlowerForm(props) {
                     id="petal_width"
                     placeholder=""
                     type="number"
-                    step="any"
+                    step="0.1"
                     onChange={(e) => setPetal_width(e.target.value)}
                     required
                   />
@@ -135,7 +135,7 @@ function FlowerForm(props) {
                     id="learning_rate"
                     placeholder="0.07"
                     type="number"
-                    step="any"
+                    step="0.01"
                     onChange={(e) => setLearning_rate(e.target.value)}
                     required
                   />

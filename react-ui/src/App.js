@@ -53,12 +53,22 @@ function App(props) {
           </div>
         </nav>
         <Route exact path="/">
-        <Redirect to="/flowerForm" />
-      </Route>
+          <Redirect to="/flowerForm" />
+        </Route>
         <div>
           <Route path="/flowerForm" render={() => <FlowerForm />} />
           <Route path="/showResults" render={() => <ShowResults />} />
         </div>
+      </div>
+      <div>
+        <footer
+          id=""
+          className="py-3 bg-light text-primary-50 fixed-bottom"
+        >
+          <div className="container text-center">
+            <small>Copyright &copy; Arshdeep-Jashanjot-Assignment4</small>
+          </div>
+        </footer>
       </div>
     </Router>
   );
